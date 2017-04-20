@@ -1,0 +1,51 @@
+control_memory: 4096
+compute_memory: 4096
+
+undercloud_memory: 12288
+
+# Giving the undercloud additional CPUs can greatly improve heat's
+# performance (and result in a shorter deploy time).
+# Using a total of 10 vcpus (1 is the default for overcloud nodes)
+undercloud_vcpu: 4
+
+# Since HA has more machines, doesn't we can set the cpu for controllers and
+# compute nodes to 1
+default_vcpu: 1
+
+# Create three controller nodes and three compute nodes.
+overcloud_nodes:
+  - name: control_0
+    flavor: control
+    virtualbmc_port: 6230
+
+  - name: compute_0
+    flavor: compute
+    virtualbmc_port: 6231
+
+  - name: contrailcontrol_0
+    flavor: compute
+#    flavor: contrail-controller
+    virtualbmc_port: 6232
+
+  - name: contraildatabase_0
+    flavor: compute
+#    flavor: contrail-controller
+    virtualbmc_port: 6233
+
+  - name: contrailanalytics_0
+    flavor: compute
+#    flavor: contrail-analytics
+    virtualbmc_port: 6234
+
+  - name: contrailanalyticsdb_0
+    flavor: compute
+#    flavor: contrail-analytics-database
+    virtualbmc_port: 6235
+
+  - name: contrailtsn_0
+    flavor: compute
+#    flavor: contrail-tsn
+    virtualbmc_port: 6236
+
+network_isolation: true
+network_isolation_type: 'single-nic-vlans'
